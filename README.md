@@ -72,8 +72,8 @@ portfolio-website/
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/sapeksh123/My_Portfolio.git
-cd My_Portfolio
+git clone https://github.com/sapeksh123/Sapeksh_Portfolio.git
+cd Sapeksh_Portfolio
 ```
 
 ### 2. Open in Browser
@@ -84,7 +84,7 @@ Simply open `index.html` in your preferred browser, or use a local server:
 python -m http.server 8000
 
 # Using Node.js
-npx serve
+npx server
 
 # Or use VS Code Live Server extension
 ```
