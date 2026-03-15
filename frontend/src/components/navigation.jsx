@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, X, Code2, Sparkles } from "lucide-react"
+import { Menu, X, Code2 } from "lucide-react"
 import { Button } from "./ui/button"
 import { ThemeToggle } from "./theme-toggle"
 import { cn } from "../lib/utils"
@@ -43,15 +43,12 @@ export function Navigation() {
         >
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-14 sm:h-16">
-                    {/* Enhanced Logo */}
+                    {/* Logo */}
                     <Link to="/" className="flex items-center space-x-2 group">
-                        <div className="p-2 rounded-xl bg-gradient-to-r from-primary to-blue-500 text-white group-hover:scale-110 transition-all duration-300 shadow-lg group-hover:shadow-xl">
+                        <div className="p-2 rounded-lg bg-primary/10 text-primary">
                             <Code2 className="h-4 w-4 sm:h-5 sm:w-5" />
                         </div>
-                        <span className="font-bold text-lg sm:text-xl bg-gradient-to-r from-primary to-blue-500 bg-clip-text text-transparent">SV</span>
-                        <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                            <Sparkles className="h-3 w-3 text-primary" />
-                        </div>
+                        <span className="font-bold text-lg sm:text-xl text-foreground">SV</span>
                     </Link>
 
                     {/* Enhanced Desktop Navigation */}
@@ -61,17 +58,16 @@ export function Navigation() {
                                 key={item.path}
                                 to={item.path}
                                 className={cn(
-                                    "px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 relative hover:bg-primary/10 hover:shadow-lg group",
+                                    "px-4 py-2 rounded-lg text-sm font-medium transition-colors relative",
                                     location.pathname === item.path
-                                        ? "text-primary bg-gradient-to-r from-primary/10 to-blue-500/10 shadow-lg border border-primary/20"
-                                        : "text-muted-foreground hover:text-foreground"
+                                        ? "text-primary bg-primary/10 border border-border"
+                                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                                 )}
                             >
                                 {item.name}
                                 {location.pathname === item.path && (
-                                    <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-1 h-1 bg-gradient-to-r from-primary to-blue-500 rounded-full" />
+                                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />
                                 )}
-                                <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-primary/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                             </Link>
                         ))}
                     </div>
@@ -99,17 +95,16 @@ export function Navigation() {
                                     key={item.path}
                                     to={item.path}
                                     className={cn(
-                                        "block px-4 py-3 rounded-lg text-base font-medium transition-all duration-300 min-h-[44px] flex items-center relative group",
+                                        "flex items-center px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[44px] relative",
                                         location.pathname === item.path
-                                            ? "text-primary bg-gradient-to-r from-primary/10 to-blue-500/10 border border-primary/20 shadow-lg"
-                                            : "text-muted-foreground hover:text-foreground hover:bg-primary/5"
+                                            ? "text-primary bg-primary/10 border border-border"
+                                            : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                                     )}
                                 >
                                     {item.name}
                                     {location.pathname === item.path && (
-                                        <div className="absolute right-3 w-2 h-2 bg-gradient-to-r from-primary to-blue-500 rounded-full" />
+                                        <div className="absolute right-3 w-2 h-2 bg-primary rounded-full" />
                                     )}
-                                    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-primary/5 to-blue-500/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10" />
                                 </Link>
                             ))}
                         </div>
