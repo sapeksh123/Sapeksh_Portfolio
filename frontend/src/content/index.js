@@ -8,7 +8,7 @@ export const homeContent = {
   name: "Sapeksh Vishwakarma",
   role: "Software Engineer | Entry-Level Technology Professional",
   bio: "Software Engineer / Entry-Level Technology Professional Full Stack Developer with practical experience in JavaScript, Flutter, React.js, Node.js, Express.js, REST APIs, and database integration. Strong understanding of business requirements, testing workflows, and technical documentation. Eager to contribute to enterprise-level projects while following structured development processes and delivery standards.",
-  cvUrl: "https://drive.google.com/file/d/1KMN30IyYfMWkM5QLEwf-VgwsbhJ7LwfK/view?usp=sharing",
+  cvUrl: "https://drive.google.com/file/d/17fAQpH4RBatQWXqlJxPesNXHRac065Qf/view?usp=sharing",
   availabilityBadge: "Available",
   socialLinks: [
     { name: "GitHub", url: "https://github.com/sapeksh123/", icon: "Github" },
