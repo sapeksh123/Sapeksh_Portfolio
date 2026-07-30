@@ -67,8 +67,8 @@
 - **Mobile-Responsive** design
 
 ## 🚀 **Next Steps:**
-1. Add your profile image to `public/files/profile.png`
-2. Customize any content as needed
+1. Update your profile image at `public/images/sapekshpic.jpg`
+2. Customize any content as needed in `src/content/index.js`
 3. Deploy to Netlify, Vercel, or your preferred platform
 
 Your React portfolio is now ready with modern features, real content, and professional design!

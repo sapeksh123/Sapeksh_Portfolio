@@ -4,7 +4,28 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sapeksh</title>
+    <title>Sapeksh Vishwakarma | Software Engineer Portfolio</title>
+    <meta name="description" content="Portfolio of Sapeksh Vishwakarma, a Software Engineer specializing in full-stack development with JavaScript, React.js, Node.js, and the MERN stack." />
+    <meta property="og:title" content="Sapeksh Vishwakarma | Software Engineer Portfolio" />
+    <meta property="og:description" content="Portfolio of Sapeksh Vishwakarma, a Software Engineer specializing in full-stack development with JavaScript, React.js, Node.js, and the MERN stack." />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Sapeksh Vishwakarma | Software Engineer Portfolio" />
+    <meta name="twitter:description" content="Portfolio of Sapeksh Vishwakarma, a Software Engineer specializing in full-stack development with JavaScript, React.js, Node.js, and the MERN stack." />
+    <script>
+      (function () {
+        var storageKey = "portfolio-theme";
+        var stored = null;
+        try {
+          stored = localStorage.getItem(storageKey);
+        } catch {}
+        var theme = stored || "dark";
+        if (theme === "system") {
+          theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+        }
+        document.documentElement.classList.add(theme);
+      })();
+    </script>
   </head>
   <body>
     <div id="root"></div>

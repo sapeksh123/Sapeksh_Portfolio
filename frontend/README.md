@@ -1,16 +1,27 @@
-# React + Vite
+# Sapeksh Vishwakarma — Portfolio (Frontend)
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React 19 + Vite single-page portfolio app. See [setup.md](setup.md) for detailed setup steps.
 
-Currently, two official plugins are available:
+## Scripts
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```bash
+npm install     # install dependencies
+npm run dev     # start dev server (http://localhost:5173)
+npm run build   # production build to dist/
+npm run preview # preview the production build locally
+npm run lint    # run ESLint
+```
 
-## React Compiler
+## Stack
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- React 19 + React Router
+- Vite
+- Tailwind CSS + shadcn/ui (Radix primitives)
+- Framer Motion
+- Lucide React icons
 
-## Expanding the ESLint configuration
+## Structure
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- `src/content/index.js` — all site copy/data (edit here to update text, links, projects, etc.)
+- `src/pages/` — one component per route
+- `src/components/` — navigation, theme provider/toggle, shared UI primitives

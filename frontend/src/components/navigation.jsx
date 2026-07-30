@@ -80,6 +80,9 @@ export function Navigation() {
                             size="icon"
                             className="lg:hidden min-w-[44px] min-h-[44px]"
                             onClick={() => setIsOpen(!isOpen)}
+                            aria-expanded={isOpen}
+                            aria-controls="mobile-nav-menu"
+                            aria-label={isOpen ? "Close menu" : "Open menu"}
                         >
                             {isOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
                         </Button>
@@ -88,7 +91,7 @@ export function Navigation() {
 
                 {/* Enhanced Mobile Navigation */}
                 {isOpen && (
-                    <div className="lg:hidden">
+                    <div id="mobile-nav-menu" className="lg:hidden">
                         <div className="px-2 pt-2 pb-3 space-y-1 bg-background/95 backdrop-blur-md rounded-xl mt-2 border border-primary/20 shadow-xl">
                             {navItems.map((item) => (
                                 <Link

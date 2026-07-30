@@ -1,6 +1,6 @@
 import { motion } from "framer-motion"
 import { Button } from "../components/ui/button"
-import { Download, Mail, ArrowRight, Sparkles, Code2 } from "lucide-react"
+import { Download, Mail, ArrowRight, Sparkles } from "lucide-react"
 import { Link } from "react-router-dom"
 import { homeContent } from "../content"
 import { getIcon } from "../content/icons"
@@ -33,7 +33,7 @@ export default function Home() {
               <div className="relative w-48 h-48 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full overflow-hidden border-2 border-border shadow-xl flex items-center justify-center bg-stone-200 dark:bg-stone-700">
                 <img
                   src="/images/sapekshpic.jpg"
-                  alt={homeContent.name}
+                  alt={`Photo of ${homeContent.name}`}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -54,8 +54,7 @@ export default function Home() {
               </span>
             </h1>
 
-            <h2 className="text-lg sm:text-lg md:text-2xl font-semibold text-primary flex items-center justify-center lg:justify-start gap-2">
-              {/* <Code2 className="h-6 w-6 sm:h-8 sm:w-8 flex-shrink-0" /> */}
+            <h2 className="text-lg md:text-2xl font-semibold text-primary flex items-center justify-center lg:justify-start gap-2">
               {homeContent.role}
             </h2>
 
@@ -71,6 +70,7 @@ export default function Home() {
               >
                 <a
                   href={homeContent.cvUrl}
+                  download
                   target="_blank"
                   rel="noopener noreferrer"
                   className="min-h-[44px] flex items-center justify-center gap-2"

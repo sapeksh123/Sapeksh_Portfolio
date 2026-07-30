@@ -21,7 +21,7 @@ export default function Experience() {
         />
 
         <div className="space-y-8 sm:space-y-12">
-          {experiences.map((exp, index) => {
+          {experiences.map((exp) => {
             const IconComponent = getIcon(exp.icon)
             return (
               <Card key={exp.title} className="hover:shadow-lg transition-shadow duration-300">

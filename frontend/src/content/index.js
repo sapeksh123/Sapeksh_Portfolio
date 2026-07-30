@@ -3,17 +3,29 @@
  * Icon fields are string keys; each page maps them to Lucide components.
  */
 
+// Single source of truth for contact/social details, referenced by homeContent.socialLinks,
+// contactMethods, and projectsContent below so an update here doesn't desync those.
+export const contactInfo = {
+  email: "sapekshvishwakarma@gmail.com",
+  phone: "+91 9285543488",
+  phoneHref: "tel:+919285543488",
+  githubUsername: "sapeksh123",
+  githubUrl: "https://github.com/sapeksh123/",
+  linkedinUsername: "sa-12v",
+  linkedinUrl: "https://www.linkedin.com/in/sa-12v",
+}
+
 export const homeContent = {
   greetingBadge: "Welcome to my portfolio",
   name: "Sapeksh Vishwakarma",
   role: "Software Engineer | Entry-Level Technology Professional",
   bio: "Software Engineer / Entry-Level Technology Professional Full Stack Developer with practical experience in JavaScript, Flutter, React.js, Node.js, Express.js, REST APIs, and database integration. Strong understanding of business requirements, testing workflows, and technical documentation. Eager to contribute to enterprise-level projects while following structured development processes and delivery standards.",
-  cvUrl: "https://drive.google.com/file/d/17fAQpH4RBatQWXqlJxPesNXHRac065Qf/view?usp=sharing",
+  cvUrl: "/Sapeksh-Vishwakarma-Resume.pdf",
   availabilityBadge: "Available",
   socialLinks: [
-    { name: "GitHub", url: "https://github.com/sapeksh123/", icon: "Github" },
-    { name: "LinkedIn", url: "https://www.linkedin.com/in/sa-12v", icon: "Linkedin" },
-    { name: "Email", url: "mailto:sapekshvishwakarma@gmail.com", icon: "Mail" },
+    { name: "GitHub", url: contactInfo.githubUrl, icon: "Github" },
+    { name: "LinkedIn", url: contactInfo.linkedinUrl, icon: "Linkedin" },
+    { name: "Email", url: `mailto:${contactInfo.email}`, icon: "Mail" },
   ],
 }
 
@@ -135,7 +147,7 @@ export const projects = [
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Authentication", "RBAC"],
     icon: "Leaf",
     liveUrl: null,
-    githubUrl: "https://github.com/sapeksh123/Agriculture-Platform-.git",
+    githubUrl: "https://github.com/sapeksh123/Agriculture-Platform-",
     color: "from-green-500 via-green-600 to-emerald-500",
     bgPattern: "bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20",
     featured: true,
@@ -146,7 +158,7 @@ export const projects = [
     tech: ["TypeScript", "Next.js", "PostgreSQL", "Prisma + NeonDB", "Cloudinary API"],
     icon: "Cloud",
     liveUrl: null,
-    githubUrl: "https://github.com/sapeksh123/Cloudinary-SaaS.git",
+    githubUrl: "https://github.com/sapeksh123/Cloudinary-SaaS",
     color: "from-blue-500 via-blue-600 to-cyan-500",
     bgPattern: "bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20",
     featured: true,
@@ -157,7 +169,7 @@ export const projects = [
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Authentication"],
     icon: "PenTool",
     liveUrl: "https://bloggify-five.vercel.app/",
-    githubUrl: "https://github.com/sapeksh123/Blogging-Web-App.git",
+    githubUrl: "https://github.com/sapeksh123/Blogging-Web-App",
     color: "from-purple-500 via-purple-600 to-pink-500",
     bgPattern: "bg-gradient-to-br from-purple-50 to-pink-50 dark:from-purple-950/20 dark:to-pink-950/20",
     featured: false,
@@ -168,7 +180,7 @@ export const projects = [
     tech: ["React.js", "Node.js", "Express.js", "Discord.js", "REST APIs", "MongoDB", "Socket.io"],
     icon: "MessageSquare",
     liveUrl: null,
-    githubUrl: "https://github.com/sapeksh123/Discord_Bot.git",
+    githubUrl: "https://github.com/sapeksh123/Discord_Bot",
     color: "from-indigo-500 via-indigo-600 to-purple-500",
     bgPattern: "bg-gradient-to-br from-indigo-50 to-purple-50 dark:from-indigo-950/20 dark:to-purple-950/20",
     featured: false,
@@ -179,7 +191,7 @@ export const projects = [
     tech: ["React.js", "Chart.js", "Recharts", "Node.js", "Express.js", "REST APIs"],
     icon: "Database",
     liveUrl: null,
-    githubUrl: "https://github.com/sapeksh123/data-visualization-web.git",
+    githubUrl: "https://github.com/sapeksh123/data-visualization-web",
     color: "from-orange-500 via-orange-600 to-red-500",
     bgPattern: "bg-gradient-to-br from-orange-50 to-red-50 dark:from-orange-950/20 dark:to-red-950/20",
     featured: false,
@@ -190,7 +202,7 @@ export const projects = [
     tech: ["React.js", "Node.js", "Express.js", "MongoDB", "Tailwind CSS", "JWT Auth", "REST APIs"],
     icon: "ShoppingCart",
     liveUrl: null,
-    githubUrl: "https://github.com/sapeksh123/Aarambh-Jeweller-Web-.git",
+    githubUrl: "https://github.com/sapeksh123/Aarambh-Jeweller-Web-",
     color: "from-pink-500 via-pink-600 to-rose-500",
     bgPattern: "bg-gradient-to-br from-pink-50 to-rose-50 dark:from-pink-950/20 dark:to-rose-950/20",
     featured: false,
@@ -204,7 +216,7 @@ export const projectsContent = {
   ctaTitle: "Want to see more?",
   ctaDescription: "These are just a few highlights from my portfolio. Check out my GitHub for more projects, contributions, and open-source work.",
   ctaButtonLabel: "Explore All Projects",
-  githubUrl: "https://github.com/sapeksh123/",
+  githubUrl: contactInfo.githubUrl,
 }
 
 export const experiences = [
@@ -222,42 +234,34 @@ export const experiences = [
     technologies: [
       "JavaScript (ES6+)",
       "Responsive Web Design",
-    
-    "MERN Stack",
+      "MERN Stack",
       "RESTful API Development",
       "JWT Authentication",
       "WebSockets",
       "Socket.IO",
-    
       "Flutter",
       "Mobile App Development",
-    
       "MySQL",
       "PostgreSQL",
       "Mongoose ORM, Prisma ORM",
-    
       "Firebase",
       "Cloudinary",
       "AWS (Basics)",
-    
       "Git",
       "GitHub",
       "CI/CD",
-    
       "Postman",
-    
       "Docker (Basics)",
       "Linux Basics",
-    
       "Netlify",
       "Vercel",
       "Render",
       "Deployment & Hosting",
-    
       "Software Development Life Cycle (SDLC)",
       "Agile Methodology",
-      "System Design Basics"
-    ]  },
+      "System Design Basics",
+    ],
+  },
 ]
 
 export const experienceContent = {
@@ -292,7 +296,7 @@ export const education = [
   {
     degree: "Higher Secondary (X)",
     institution: "Madhya Pradesh Board of Secondary Education",
-    duration: "2019 – 2020  ",
+    duration: "2019 – 2020",
     grade: "90%",
     description: [
       "Jabalpur, MP",
@@ -317,8 +321,8 @@ export const contactMethods = [
     title: "Email",
     description: "Send me an email and I'll get back to you within 24 hours.",
     icon: "Mail",
-    value: "sapekshvishwakarma@gmail.com",
-    href: "mailto:sapekshvishwakarma@gmail.com",
+    value: contactInfo.email,
+    href: `mailto:${contactInfo.email}`,
     color: "from-blue-500 via-blue-600 to-cyan-500",
     bgPattern: "bg-gradient-to-br from-blue-50 to-cyan-50 dark:from-blue-950/20 dark:to-cyan-950/20",
   },
@@ -326,8 +330,8 @@ export const contactMethods = [
     title: "Phone",
     description: "Call or message me anytime.",
     icon: "Phone",
-    value: "+91 9285543488",
-    href: "tel:+919285543488",
+    value: contactInfo.phone,
+    href: contactInfo.phoneHref,
     color: "from-green-500 via-green-600 to-emerald-500",
     bgPattern: "bg-gradient-to-br from-green-50 to-emerald-50 dark:from-green-950/20 dark:to-emerald-950/20",
   },
@@ -335,8 +339,8 @@ export const contactMethods = [
     title: "GitHub",
     description: "Check out my code repositories and contributions.",
     icon: "Github",
-    value: "sapeksh123",
-    href: "https://github.com/sapeksh123/",
+    value: contactInfo.githubUsername,
+    href: contactInfo.githubUrl,
     color: "from-gray-600 via-gray-700 to-gray-800",
     bgPattern: "bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-950/20 dark:to-gray-900/20",
   },
@@ -344,8 +348,8 @@ export const contactMethods = [
     title: "LinkedIn",
     description: "Let's connect and build our professional network.",
     icon: "Linkedin",
-    value: "sa-12v",
-    href: "https://www.linkedin.com/in/sa-12v",
+    value: contactInfo.linkedinUsername,
+    href: contactInfo.linkedinUrl,
     color: "from-blue-600 via-blue-700 to-blue-800",
     bgPattern: "bg-gradient-to-br from-blue-50 to-blue-100 dark:from-blue-950/20 dark:to-blue-900/20",
   },
