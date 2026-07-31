@@ -1,6 +1,5 @@
 /** @type {import('tailwindcss').Config} */
 export default {
-    darkMode: ["class"],
     content: [
         "./src/**/*.{js,jsx,ts,tsx}",
         "./index.html"
@@ -46,6 +45,10 @@ export default {
                 lg: "var(--radius)",
                 md: "calc(var(--radius) - 2px)",
                 sm: "calc(var(--radius) - 4px)",
+            },
+            fontFamily: {
+                mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
+                display: ['"Anton"', "sans-serif"],
             },
             spacing: {
                 '18': '4.5rem',
