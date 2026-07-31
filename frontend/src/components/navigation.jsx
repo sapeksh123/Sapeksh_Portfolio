@@ -1,8 +1,7 @@
 import { useState, useEffect } from "react"
 import { Link, useLocation } from "react-router-dom"
-import { Menu, X, Code2 } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { Button } from "./ui/button"
-import { ThemeToggle } from "./theme-toggle"
 import { cn } from "../lib/utils"
 
 const navItems = [
@@ -37,18 +36,19 @@ export function Navigation() {
             className={cn(
                 "fixed top-0 w-full z-50 transition-all duration-300",
                 scrolled
-                    ? "bg-background/80 backdrop-blur-md border-b shadow-sm"
+                    ? "bg-background/80 backdrop-blur-md border-b border-border"
                     : "bg-transparent"
             )}
         >
             <div className="container mx-auto px-4">
                 <div className="flex items-center justify-between h-14 sm:h-16">
                     {/* Logo */}
-                    <Link to="/" className="flex items-center space-x-2 group">
-                        <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                            <Code2 className="h-4 w-4 sm:h-5 sm:w-5" />
-                        </div>
-                        <span className="font-bold text-lg sm:text-xl text-foreground">SV</span>
+                    <Link to="/" className="flex items-center group">
+                        <img
+                            src="/images/logoSV.png"
+                            alt="Sapeksh Vishwakarma"
+                            className="h-9 w-9 sm:h-10 sm:w-10 object-contain"
+                        />
                     </Link>
 
                     {/* Enhanced Desktop Navigation */}
@@ -58,23 +58,22 @@ export function Navigation() {
                                 key={item.path}
                                 to={item.path}
                                 className={cn(
-                                    "px-4 py-2 rounded-lg text-sm font-medium transition-colors relative",
+                                    "px-4 py-2 font-mono text-sm uppercase tracking-wide transition-colors relative",
                                     location.pathname === item.path
-                                        ? "text-primary bg-primary/10 border border-border"
-                                        : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
+                                        ? "text-primary"
+                                        : "text-muted-foreground hover:text-foreground"
                                 )}
                             >
                                 {item.name}
                                 {location.pathname === item.path && (
-                                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-1 h-1 bg-primary rounded-full" />
+                                    <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-4 h-0.5 bg-primary" />
                                 )}
                             </Link>
                         ))}
                     </div>
 
-                    {/* Theme Toggle & Mobile Menu */}
+                    {/* Mobile Menu */}
                     <div className="flex items-center space-x-2">
-                        <ThemeToggle />
                         <Button
                             variant="ghost"
                             size="icon"
@@ -92,22 +91,19 @@ export function Navigation() {
                 {/* Enhanced Mobile Navigation */}
                 {isOpen && (
                     <div id="mobile-nav-menu" className="lg:hidden">
-                        <div className="px-2 pt-2 pb-3 space-y-1 bg-background/95 backdrop-blur-md rounded-xl mt-2 border border-primary/20 shadow-xl">
+                        <div className="px-2 pt-2 pb-3 space-y-1 bg-background/95 backdrop-blur-md mt-2 border border-border">
                             {navItems.map((item) => (
                                 <Link
                                     key={item.path}
                                     to={item.path}
                                     className={cn(
-                                        "flex items-center px-4 py-3 rounded-lg text-base font-medium transition-colors min-h-[44px] relative",
+                                        "flex items-center px-4 py-3 font-mono uppercase tracking-wide text-sm transition-colors min-h-[44px] relative",
                                         location.pathname === item.path
-                                            ? "text-primary bg-primary/10 border border-border"
+                                            ? "text-primary bg-primary/10 border-l-2 border-primary"
                                             : "text-muted-foreground hover:text-foreground hover:bg-muted/50"
                                     )}
                                 >
                                     {item.name}
-                                    {location.pathname === item.path && (
-                                        <div className="absolute right-3 w-2 h-2 bg-primary rounded-full" />
-                                    )}
                                 </Link>
                             ))}
                         </div>
