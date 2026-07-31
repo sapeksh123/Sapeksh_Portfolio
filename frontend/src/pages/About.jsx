@@ -1,10 +1,12 @@
 import { motion } from "framer-motion"
-import { Card, CardContent, CardHeader, CardTitle } from "../components/ui/card"
 import { PageLayout } from "../components/PageLayout"
 import { SectionHeader } from "../components/SectionHeader"
-import { Target } from "lucide-react"
 import { aboutContent } from "../content"
 import { getIcon } from "../content/icons"
+
+function slug(title) {
+  return title.toLowerCase().replace(/[^a-z0-9]+/g, "_").replace(/^_|_$/g, "")
+}
 
 export default function About() {
   return (
@@ -15,80 +17,62 @@ export default function About() {
         transition={{ duration: 0.35 }}
       >
         <SectionHeader
+          eyebrow="Profile"
           title={aboutContent.sectionTitle}
           titleHighlight={aboutContent.sectionTitleHighlight}
           subtitle={aboutContent.sectionSubtitle}
         />
 
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 lg:gap-12 mb-12 sm:mb-16">
-          <div className="xl:col-span-2 space-y-6">
-            {aboutContent.highlights.map((highlight) => {
-              const IconComponent = getIcon(highlight.icon)
-              return (
-                <Card
-                  key={highlight.title}
-                  className={`hover:shadow-lg transition-shadow duration-300 border-0 ${highlight.bgPattern}`}
-                >
-                  <CardHeader className="p-4 sm:p-6 pb-3">
-                    <CardTitle className="flex items-center gap-3 text-lg sm:text-xl">
-                      {IconComponent && (
-                        <div className="p-3 sm:p-4 rounded-lg bg-primary/10 text-primary flex-shrink-0">
-                          <IconComponent className="h-5 w-5 sm:h-6 sm:w-6" />
-                        </div>
-                      )}
-                      <span className="leading-tight font-bold">{highlight.title}</span>
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent className="px-4 sm:px-6 pt-0">
-                    <p className="text-muted-foreground leading-relaxed text-sm sm:text-base">
+          {/* File-style panel: about.md rendered as commented sections */}
+          <div className="xl:col-span-2 border border-border bg-card">
+            <div className="flex items-center gap-2 px-4 sm:px-6 py-3 border-b border-border">
+              <span className="h-2.5 w-2.5 border border-border" />
+              <span className="h-2.5 w-2.5 border border-border" />
+              <span className="h-2.5 w-2.5 border border-border" />
+              <span className="font-mono text-xs text-muted-foreground ml-2">about.md</span>
+            </div>
+            <div className="divide-y divide-border">
+              {aboutContent.highlights.map((highlight) => {
+                const IconComponent = getIcon(highlight.icon)
+                return (
+                  <div key={highlight.title} className="p-4 sm:p-6">
+                    <div className="flex items-center gap-2 mb-3 font-mono text-xs sm:text-sm text-primary">
+                      {IconComponent && <IconComponent className="h-4 w-4 flex-shrink-0" />}
+                      <span>// {slug(highlight.title)}</span>
+                    </div>
+                    <p className="text-muted-foreground leading-relaxed text-sm sm:text-base pl-6 border-l border-border">
                       {highlight.description}
                     </p>
-                  </CardContent>
-                </Card>
-              )
-            })}
+                  </div>
+                )
+              })}
+            </div>
           </div>
 
+          {/* Stat panel: whoami --info */}
           <div className="xl:col-span-1 max-w-md mx-auto xl:max-w-none xl:mx-0">
-            <Card className="h-fit xl:sticky xl:top-24 bg-gradient-to-br from-primary/5 via-blue-500/5 to-accent/5 border-primary/20 shadow-lg">
-              <CardHeader className="p-4 sm:p-6">
-                <CardTitle className="text-lg sm:text-xl flex items-center gap-2">
-                  <Target className="h-5 w-5 text-primary flex-shrink-0" />
-                  {aboutContent.quickInfo.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="px-4 sm:px-6 pt-0">
-                <div className="space-y-4">
-                  {aboutContent.quickInfo.items.map((item) => {
-                    const IconComponent = getIcon(item.icon)
-                    return (
-                      <div
-                        key={item.label}
-                        className="flex items-center gap-3 py-3 border-b border-primary/10 last:border-0 hover:bg-primary/5 rounded-lg px-2 transition-colors"
-                      >
-                        {IconComponent && (
-                          <div className="p-2 rounded-lg bg-primary/10 text-primary flex-shrink-0">
-                            <IconComponent className="h-4 w-4" />
-                          </div>
-                        )}
-                        <div className="min-w-0 flex-1">
-                          <span className="block text-xs sm:text-sm text-muted-foreground font-medium">
-                            {item.label}
-                          </span>
-                          <span
-                            className={`font-bold text-sm sm:text-base ${
-                              item.valueHighlight ? "text-green-600 dark:text-green-400" : ""
-                            }`}
-                          >
-                            {item.value}
-                          </span>
-                        </div>
-                      </div>
-                    )
-                  })}
-                </div>
-              </CardContent>
-            </Card>
+            <div className="h-fit xl:sticky xl:top-24 border border-border bg-card">
+              <div className="px-4 sm:px-6 py-3 border-b border-border font-mono text-xs sm:text-sm text-primary">
+                $ whoami --info
+              </div>
+              <div className="divide-y divide-border">
+                {aboutContent.quickInfo.items.map((item) => (
+                  <div key={item.label} className="flex items-center justify-between gap-3 py-3 px-4 sm:px-6">
+                    <span className="font-mono text-xs sm:text-sm text-muted-foreground uppercase tracking-wide">
+                      {item.label}
+                    </span>
+                    <span
+                      className={`font-bold text-sm sm:text-base text-right ${
+                        item.valueHighlight ? "text-primary" : ""
+                      }`}
+                    >
+                      {item.value}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
           </div>
         </div>
       </motion.div>
