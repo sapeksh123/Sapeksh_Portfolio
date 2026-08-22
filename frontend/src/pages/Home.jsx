@@ -10,7 +10,7 @@ const allSkills = skillCategories.flatMap((category) => category.skills)
 
 export default function Home() {
   return (
-    <div className="lg:h-[calc(100vh-4rem)] lg:overflow-hidden flex flex-col relative overflow-x-hidden">
+    <div className="min-h-[calc(100vh-4rem)] lg:h-[calc(100vh-4rem)] lg:overflow-hidden flex flex-col relative overflow-x-hidden">
       {/* Subtle background */}
       <div className="absolute inset-0 -z-10 overflow-hidden">
         <div className="absolute top-1/3 right-1/4 w-64 h-64 sm:w-96 sm:h-96 lg:w-[32rem] lg:h-[32rem] bg-primary/10 blur-3xl rounded-full" />
