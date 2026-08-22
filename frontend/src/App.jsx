@@ -33,7 +33,7 @@ function App() {
 
   return (
     <Router>
-      <div className="min-h-screen bg-background">
+      <div className="bg-background">
         <Navigation />
         <main className="pt-16">
           <Routes>

@@ -4,9 +4,9 @@
  */
 export function MarqueeStrip({ tags }) {
   const track = (
-    <div className="flex gap-8 shrink-0 pr-8">
+    <div className="flex gap-4 sm:gap-8 shrink-0 pr-4 sm:pr-8">
       {tags.map((tag, i) => (
-        <span key={i} className="flex items-center gap-8 font-mono uppercase text-sm tracking-wide text-muted-foreground">
+        <span key={i} className="flex items-center gap-4 sm:gap-8 whitespace-nowrap font-mono uppercase text-xs sm:text-sm tracking-wide text-muted-foreground">
           {tag}
           <span className="text-primary" aria-hidden="true">•</span>
         </span>
