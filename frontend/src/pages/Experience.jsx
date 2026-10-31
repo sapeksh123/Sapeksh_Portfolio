@@ -1,22 +1,16 @@
 import { motion } from "framer-motion"
 import { PageLayout } from "../components/PageLayout"
 import { SectionHeader } from "../components/SectionHeader"
+import { Timeline, TimelineItem } from "../components/Timeline"
+import { TagList } from "../components/TagList"
 import { MapPin, Calendar } from "lucide-react"
 import { experiences, experienceContent } from "../content"
 import { getIcon } from "../content/icons"
 
-function logSlug(company) {
-  return company.split(",")[0].toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "")
-}
-
 export default function Experience() {
   return (
     <PageLayout>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.35 }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>
         <SectionHeader
           eyebrow="Career"
           title={experienceContent.sectionTitle}
@@ -24,62 +18,63 @@ export default function Experience() {
           subtitle={experienceContent.sectionSubtitle}
         />
 
-        <div className="space-y-6 sm:space-y-8 max-w-4xl mx-auto">
+        <Timeline className="mx-auto max-w-4xl">
           {experiences.map((exp) => {
             const IconComponent = getIcon(exp.icon)
             return (
-              <div key={exp.title} className="border border-border bg-card">
-                <div className="flex items-center gap-2 px-4 sm:px-6 py-3 border-b border-border font-mono text-xs sm:text-sm text-primary">
-                  {IconComponent && <IconComponent className="h-4 w-4 flex-shrink-0" />}
-                  <span>$ cat experience/{logSlug(exp.company)}.log</span>
-                </div>
-
-                <div className="p-4 sm:p-6 lg:p-8">
-                  <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-2 mb-4">
-                    <div>
-                      <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-1 leading-tight">
-                        {exp.title}
-                      </h3>
-                      <p className="text-base sm:text-lg text-primary font-medium mb-2">
-                        {exp.company}
-                      </p>
-                      <div className="flex flex-wrap gap-2 sm:gap-4 text-muted-foreground font-mono text-sm uppercase">
-                        <div className="flex items-center gap-1">
-                          <MapPin className="h-4 w-4 flex-shrink-0" />
-                          <span>{exp.location}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Calendar className="h-4 w-4 flex-shrink-0" />
-                          <span>{exp.duration}</span>
-                        </div>
-                      </div>
-                    </div>
-                    <span className="inline-block px-3 py-1 border border-primary text-primary font-mono uppercase text-xs flex-shrink-0">
-                      {exp.type}
-                    </span>
+              <TimelineItem key={`${exp.company}-${exp.title}`} active={exp.current} markerClassName="top-[15px] sm:top-[17px]">
+                <article className="border border-border bg-card">
+                  <div className="flex min-w-0 items-center gap-2 border-b border-border px-4 py-3 font-mono text-xs text-primary sm:px-6 sm:text-sm">
+                    {IconComponent && <IconComponent className="h-4 w-4 shrink-0" aria-hidden="true" />}
+                    <span className="min-w-0 truncate">$ cat {exp.slug}.log</span>
+                    {exp.current && (
+                      <span className="ml-auto flex shrink-0 items-center gap-1.5 text-[11px] uppercase tracking-widest text-muted-foreground sm:text-xs">
+                        <span className="h-1.5 w-1.5 animate-pulse bg-primary" aria-hidden="true" />
+                        Current
+                      </span>
+                    )}
                   </div>
 
-                  <ul className="space-y-1.5 mb-4 sm:mb-6">
-                    {exp.responsibilities.map((resp, i) => (
-                      <li
-                        key={i}
-                        className="text-muted-foreground flex items-start gap-2 text-sm sm:text-base font-mono"
-                      >
-                        <span className="text-primary flex-shrink-0">&gt;</span>
-                        <span className="font-sans">{resp}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <div className="p-4 sm:p-6 lg:p-8">
+                    <div className="mb-4 flex flex-col gap-3 sm:mb-5 md:flex-row md:items-start md:justify-between">
+                      <div className="min-w-0">
+                        <h2 className="text-lg font-bold leading-snug sm:text-xl lg:text-2xl">{exp.title}</h2>
+                        <p className="mt-1 text-base font-medium text-primary sm:text-lg">{exp.company}</p>
+                        <div className="mt-2 flex flex-wrap gap-x-4 gap-y-1 font-mono text-xs uppercase text-muted-foreground sm:text-sm">
+                          <span className="flex items-center gap-1.5">
+                            <MapPin className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            {exp.location}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <Calendar className="h-4 w-4 shrink-0" aria-hidden="true" />
+                            {exp.duration}
+                          </span>
+                        </div>
+                      </div>
+                      <span className="self-start border border-primary px-2.5 py-1 font-mono text-xs uppercase text-primary">
+                        {exp.type}
+                      </span>
+                    </div>
 
-                  <p className="font-mono text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    <span className="text-primary"># tech_stack: </span>
-                    {exp.technologies.join(", ")}
-                  </p>
-                </div>
-              </div>
+                    <ul className="mb-5 space-y-2 sm:mb-6">
+                      {exp.responsibilities.map((resp) => (
+                        <li key={resp} className="flex items-start gap-2.5 text-sm text-muted-foreground sm:text-base">
+                          <span className="shrink-0 font-mono text-primary" aria-hidden="true">
+                            &gt;
+                          </span>
+                          <span>{resp}</span>
+                        </li>
+                      ))}
+                    </ul>
+
+                    <p className="mb-2.5 font-mono text-xs text-primary"># tech_stack</p>
+                    <TagList tags={exp.technologies} label={`${exp.company} tech stack`} />
+                  </div>
+                </article>
+              </TimelineItem>
             )
           })}
-        </div>
+        </Timeline>
       </motion.div>
     </PageLayout>
   )

@@ -33,9 +33,9 @@ function App() {
 
   return (
     <Router>
-      <div className="bg-background">
+      <div className="min-h-dvh bg-background">
         <Navigation />
-        <main className="pt-16">
+        <main className="pt-14 sm:pt-16">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />

@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
 import { PageLayout } from "../components/PageLayout"
 import { SectionHeader } from "../components/SectionHeader"
+import { WindowBar } from "../components/WindowBar"
 import { aboutContent } from "../content"
 import { getIcon } from "../content/icons"
 
@@ -11,11 +12,7 @@ function slug(title) {
 export default function About() {
   return (
     <PageLayout>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.35 }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>
         <SectionHeader
           eyebrow="Profile"
           title={aboutContent.sectionTitle}
@@ -23,57 +20,59 @@ export default function About() {
           subtitle={aboutContent.sectionSubtitle}
         />
 
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-8 lg:gap-12 mb-12 sm:mb-16">
+        <div className="grid grid-cols-1 items-start gap-6 sm:gap-8 xl:grid-cols-3 xl:gap-10">
           {/* File-style panel: about.md rendered as commented sections */}
-          <div className="xl:col-span-2 border border-border bg-card">
-            <div className="flex items-center gap-2 px-4 sm:px-6 py-3 border-b border-border">
-              <span className="h-2.5 w-2.5 border border-border" />
-              <span className="h-2.5 w-2.5 border border-border" />
-              <span className="h-2.5 w-2.5 border border-border" />
-              <span className="font-mono text-xs text-muted-foreground ml-2">about.md</span>
-            </div>
+          <section className="border border-border bg-card xl:col-span-2" aria-label="About me">
+            <WindowBar>
+              <span className="font-mono text-xs text-muted-foreground">about.md</span>
+            </WindowBar>
             <div className="divide-y divide-border">
               {aboutContent.highlights.map((highlight) => {
                 const IconComponent = getIcon(highlight.icon)
                 return (
                   <div key={highlight.title} className="p-4 sm:p-6">
-                    <div className="flex items-center gap-2 mb-3 font-mono text-xs sm:text-sm text-primary">
-                      {IconComponent && <IconComponent className="h-4 w-4 flex-shrink-0" />}
+                    <h2 className="mb-3 flex items-center gap-2 font-mono text-xs text-primary sm:text-sm">
+                      {IconComponent && <IconComponent className="h-4 w-4 shrink-0" aria-hidden="true" />}
                       <span>// {slug(highlight.title)}</span>
-                    </div>
-                    <p className="text-muted-foreground leading-relaxed text-sm sm:text-base pl-6 border-l border-border">
+                    </h2>
+                    <p className="border-l border-border pl-4 text-sm leading-relaxed text-muted-foreground sm:pl-6 sm:text-base">
                       {highlight.description}
                     </p>
                   </div>
                 )
               })}
             </div>
-          </div>
+          </section>
 
           {/* Stat panel: whoami --info */}
-          <div className="xl:col-span-1 max-w-md mx-auto xl:max-w-none xl:mx-0">
-            <div className="h-fit xl:sticky xl:top-24 border border-border bg-card">
-              <div className="px-4 sm:px-6 py-3 border-b border-border font-mono text-xs sm:text-sm text-primary">
-                $ whoami --info
-              </div>
-              <div className="divide-y divide-border">
-                {aboutContent.quickInfo.items.map((item) => (
-                  <div key={item.label} className="flex items-center justify-between gap-3 py-3 px-4 sm:px-6">
-                    <span className="font-mono text-xs sm:text-sm text-muted-foreground uppercase tracking-wide">
-                      {item.label}
-                    </span>
-                    <span
-                      className={`font-bold text-sm sm:text-base text-right ${
-                        item.valueHighlight ? "text-primary" : ""
-                      }`}
-                    >
-                      {item.value}
-                    </span>
-                  </div>
-                ))}
-              </div>
+          <aside className="border border-border bg-card xl:sticky xl:top-24" aria-label="Quick info">
+            <div className="border-b border-border px-4 py-3 font-mono text-xs text-primary sm:px-6 sm:text-sm">
+              {aboutContent.quickInfo.title}
             </div>
-          </div>
+            <dl className="grid grid-cols-1 gap-px bg-border sm:grid-cols-2 xl:grid-cols-1">
+              {aboutContent.quickInfo.items.map((item) => {
+                const IconComponent = getIcon(item.icon)
+                return (
+                  <div
+                    key={item.label}
+                    className="flex items-start gap-3 bg-card px-4 py-3.5 sm:px-6"
+                  >
+                    {IconComponent && (
+                      <IconComponent className="mt-0.5 h-4 w-4 shrink-0 text-muted-foreground" aria-hidden="true" />
+                    )}
+                    <div className="min-w-0">
+                      <dt className="font-mono text-[11px] uppercase tracking-widest text-muted-foreground sm:text-xs">
+                        {item.label}
+                      </dt>
+                      <dd className={`mt-0.5 text-sm font-semibold sm:text-base ${item.valueHighlight ? "text-primary" : ""}`}>
+                        {item.value}
+                      </dd>
+                    </div>
+                  </div>
+                )
+              })}
+            </dl>
+          </aside>
         </div>
       </motion.div>
     </PageLayout>

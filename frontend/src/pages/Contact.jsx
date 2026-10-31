@@ -1,9 +1,8 @@
 import { motion } from "framer-motion"
-import { Card, CardContent } from "../components/ui/card"
-import { Button } from "../components/ui/button"
+import { Card } from "../components/ui/card"
 import { PageLayout } from "../components/PageLayout"
 import { SectionHeader } from "../components/SectionHeader"
-import { Send, MessageCircle, Globe, Clock } from "lucide-react"
+import { ArrowUpRight, MessageCircle, Globe, Clock } from "lucide-react"
 import { contactMethods, contactContent } from "../content"
 import { getIcon } from "../content/icons"
 
@@ -14,11 +13,7 @@ function envVar(title) {
 export default function Contact() {
   return (
     <PageLayout>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.35 }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>
         <SectionHeader
           eyebrow="Connect"
           title={contactContent.sectionTitle}
@@ -26,90 +21,76 @@ export default function Contact() {
           subtitle={contactContent.sectionSubtitle}
         />
 
-        <div className="max-w-3xl mx-auto border border-border bg-card mb-12 sm:mb-16">
-          <div className="flex items-center gap-2 px-4 sm:px-6 py-3 border-b border-border font-mono text-xs sm:text-sm text-primary">
-            $ ./contact.sh
-          </div>
-          <div className="divide-y divide-border">
-            {contactMethods.map((method) => {
-              const IconComponent = getIcon(method.icon)
-              const SendIcon = getIcon("Send")
-              return (
-                <div
-                  key={method.title}
-                  className="flex flex-col sm:flex-row sm:items-center gap-3 sm:gap-4 p-4 sm:p-6"
-                >
-                  {IconComponent && (
-                    <div className="p-2.5 border border-border bg-primary/10 text-primary flex-shrink-0">
-                      <IconComponent className="h-4 w-4 sm:h-5 sm:w-5" />
-                    </div>
-                  )}
-                  <div className="flex-1 min-w-0">
-                    <p className="font-mono text-xs sm:text-sm text-muted-foreground">
-                      $ echo ${envVar(method.title)}
-                    </p>
-                    <p className="font-bold text-primary text-sm sm:text-base break-all">
-                      {method.value}
-                    </p>
-                  </div>
-                  <Button asChild size="sm" className="flex-shrink-0 min-h-[44px] w-full sm:w-auto">
+        <div className="mx-auto max-w-4xl space-y-8 sm:space-y-12">
+          <section className="border border-border bg-card" aria-label="Contact methods">
+            <div className="border-b border-border px-4 py-3 font-mono text-xs text-primary sm:px-6 sm:text-sm">
+              $ ./contact.sh
+            </div>
+            <ul className="divide-y divide-border">
+              {contactMethods.map((method) => {
+                const IconComponent = getIcon(method.icon)
+                return (
+                  <li key={method.title}>
                     <a
                       href={method.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center gap-2"
+                      {...(method.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                      aria-label={`${method.title}: ${method.value}`}
+                      className="group flex items-center gap-3 p-4 transition-colors hover:bg-muted/50 sm:gap-4 sm:px-6 sm:py-5"
                     >
-                      {SendIcon && <SendIcon className="h-4 w-4" />}
-                      Connect
+                      {IconComponent && (
+                        <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-border bg-primary/10 text-primary sm:h-11 sm:w-11">
+                          <IconComponent className="h-5 w-5" aria-hidden="true" />
+                        </span>
+                      )}
+                      <span className="min-w-0 flex-1">
+                        <span className="block font-mono text-[11px] text-muted-foreground sm:text-xs">
+                          $ echo ${envVar(method.title)}
+                        </span>
+                        <span className="block break-words text-sm font-semibold text-foreground transition-colors group-hover:text-primary sm:text-base">
+                          {method.value}
+                        </span>
+                      </span>
+                      <span
+                        className="flex h-9 shrink-0 items-center justify-center gap-1.5 border border-border px-2.5 font-mono text-xs uppercase tracking-wide text-muted-foreground transition-colors group-hover:border-primary group-hover:text-primary"
+                        aria-hidden="true"
+                      >
+                        <span className="hidden sm:inline">Open</span>
+                        <ArrowUpRight className="h-4 w-4" />
+                      </span>
                     </a>
-                  </Button>
-                </div>
-              )
-            })}
-          </div>
-        </div>
+                  </li>
+                )
+              })}
+            </ul>
+          </section>
 
-        <div className="max-w-4xl mx-auto">
-          <Card className="bg-primary text-primary-foreground border-primary overflow-hidden">
-            <CardContent className="py-10 sm:py-16 relative">
-              <div className="text-center mb-8 sm:mb-10">
-                <div className="flex items-center justify-center mb-4">
-                  <MessageCircle className="h-8 w-8" />
-                </div>
-                <h3 className="font-display uppercase text-2xl sm:text-4xl leading-tight mb-4">
-                  {contactContent.ctaTitle}
-                </h3>
-                <p className="max-w-2xl mx-auto leading-relaxed text-sm sm:text-base opacity-90">
-                  {contactContent.ctaDescription}
-                </p>
+          <Card className="border-primary bg-primary px-5 py-8 text-primary-foreground sm:px-10 sm:py-14">
+            <div className="mb-8 text-center sm:mb-10">
+              <MessageCircle className="mx-auto mb-4 h-7 w-7 sm:h-8 sm:w-8" aria-hidden="true" />
+              <h2 className="mb-3 font-display text-2xl uppercase leading-tight sm:mb-4 sm:text-4xl">
+                {contactContent.ctaTitle}
+              </h2>
+              <p className="mx-auto max-w-2xl text-sm leading-relaxed opacity-90 sm:text-base">
+                {contactContent.ctaDescription}
+              </p>
+            </div>
+
+            <dl className="grid grid-cols-1 gap-6 border-t border-primary-foreground/20 pt-6 sm:grid-cols-2 sm:pt-8">
+              <div className="text-center">
+                <dt className="mb-2 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-wide sm:text-sm">
+                  <Globe className="h-4 w-4" aria-hidden="true" />
+                  {contactContent.locationLabel}
+                </dt>
+                <dd className="text-sm opacity-90 sm:text-base">{contactContent.locationValue}</dd>
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 sm:gap-8">
-                <div className="text-center">
-                  <div className="flex items-center justify-center mb-3 gap-3">
-                    <Globe className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <h4 className="font-mono uppercase tracking-wide text-sm sm:text-base">
-                      {contactContent.locationLabel}
-                    </h4>
-                  </div>
-                  <p className="text-sm sm:text-base opacity-90">
-                    {contactContent.locationValue}
-                  </p>
-                </div>
-
-                <div className="text-center">
-                  <div className="flex items-center justify-center mb-3 gap-3">
-                    <Clock className="h-4 w-4 sm:h-5 sm:w-5" />
-                    <h4 className="font-mono uppercase tracking-wide text-sm sm:text-base">
-                      {contactContent.responseLabel}
-                    </h4>
-                  </div>
-                  <p className="text-sm sm:text-base opacity-90">
-                    {contactContent.responseValue}
-                  </p>
-                </div>
+              <div className="text-center">
+                <dt className="mb-2 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-wide sm:text-sm">
+                  <Clock className="h-4 w-4" aria-hidden="true" />
+                  {contactContent.responseLabel}
+                </dt>
+                <dd className="text-sm opacity-90 sm:text-base">{contactContent.responseValue}</dd>
               </div>
-            </CardContent>
+            </dl>
           </Card>
         </div>
       </motion.div>

@@ -9,7 +9,7 @@ const BOOT_LINES = [
   "starting ui renderer... [ok]",
   "",
   `> ${homeContent.name}`,
-  `> ${homeContent.role.split("|")[0].trim()}`,
+  `> ${homeContent.role}`,
 ]
 
 const TYPE_SPEED_MS = 18
@@ -76,7 +76,7 @@ export function SplashScreen({ onComplete }) {
       initial={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4 }}
-      className="fixed inset-0 z-50 bg-background flex items-center justify-center p-6"
+      className="fixed inset-0 z-[60] bg-background flex items-center justify-center p-6"
     >
       <div className="w-full max-w-lg font-mono text-sm sm:text-base space-y-1">
         {completedLines.map((line, i) => (

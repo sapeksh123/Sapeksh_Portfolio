@@ -4,7 +4,7 @@
 export function IndexBadge({ index, className = "" }) {
   return (
     <span
-      className={`font-mono text-xs sm:text-sm text-muted-foreground border border-border px-2 py-1 ${className}`}
+      className={`inline-flex h-6 min-w-[2rem] items-center justify-center border border-border px-1.5 font-mono text-xs leading-none text-muted-foreground ${className}`}
     >
       {String(index + 1).padStart(2, "0")}
     </span>

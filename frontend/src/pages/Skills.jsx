@@ -2,17 +2,14 @@ import { motion } from "framer-motion"
 import { PageLayout } from "../components/PageLayout"
 import { SectionHeader } from "../components/SectionHeader"
 import { IndexBadge } from "../components/IndexBadge"
+import { TagList } from "../components/TagList"
 import { skillCategories, skillsContent } from "../content"
 import { getIcon } from "../content/icons"
 
 export default function Skills() {
   return (
     <PageLayout>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.35 }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>
         <SectionHeader
           eyebrow="Expertise"
           title={skillsContent.sectionTitle}
@@ -20,32 +17,30 @@ export default function Skills() {
           subtitle={skillsContent.sectionSubtitle}
         />
 
-        <div className="max-w-4xl mx-auto border border-border bg-card">
-          <div className="flex items-center gap-2 px-4 sm:px-6 py-3 border-b border-border font-mono text-xs sm:text-sm text-primary">
+        <div className="mx-auto max-w-4xl border border-border bg-card">
+          <div className="border-b border-border px-4 py-3 font-mono text-xs text-primary sm:px-6 sm:text-sm">
             $ ls -la ./skills
           </div>
-          <div className="divide-y divide-border">
+          <ul className="divide-y divide-border">
             {skillCategories.map((category, i) => {
               const IconComponent = getIcon(category.icon)
               return (
-                <div
+                <li
                   key={category.title}
-                  className="flex flex-col sm:flex-row sm:items-baseline gap-2 sm:gap-4 p-4 sm:p-5 hover:bg-muted/30 transition-colors duration-200"
+                  className="flex flex-col gap-3 p-4 transition-colors duration-200 hover:bg-muted/40 sm:flex-row sm:items-start sm:gap-4 sm:p-5"
                 >
-                  <div className="flex items-center gap-2 sm:w-56 flex-shrink-0">
+                  <div className="flex shrink-0 items-center gap-2.5 sm:w-48 sm:pt-0.5 md:w-56">
                     <IndexBadge index={i} />
-                    {IconComponent && <IconComponent className="h-4 w-4 text-primary flex-shrink-0" />}
-                    <h3 className="font-mono uppercase tracking-wide text-foreground text-sm">
+                    {IconComponent && <IconComponent className="h-4 w-4 shrink-0 text-primary" aria-hidden="true" />}
+                    <h2 className="font-mono text-sm uppercase leading-tight tracking-wide text-foreground">
                       {category.title}
-                    </h3>
+                    </h2>
                   </div>
-                  <p className="font-mono text-xs sm:text-sm text-muted-foreground leading-relaxed">
-                    {category.skills.join(", ")}
-                  </p>
-                </div>
+                  <TagList tags={category.skills} label={category.title} className="min-w-0 flex-1" />
+                </li>
               )
             })}
-          </div>
+          </ul>
         </div>
       </motion.div>
     </PageLayout>

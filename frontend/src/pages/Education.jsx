@@ -1,17 +1,14 @@
 import { motion } from "framer-motion"
 import { PageLayout } from "../components/PageLayout"
 import { SectionHeader } from "../components/SectionHeader"
-import { Calendar, Award } from "lucide-react"
+import { Timeline, TimelineItem } from "../components/Timeline"
+import { Calendar, Award, MapPin } from "lucide-react"
 import { education, educationContent, certificates } from "../content"
 
 export default function Education() {
   return (
     <PageLayout>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.35 }}
-      >
+      <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.35 }}>
         <SectionHeader
           eyebrow="Academics"
           title={educationContent.sectionTitle}
@@ -19,63 +16,62 @@ export default function Education() {
           subtitle={educationContent.sectionSubtitle}
         />
 
-        <div className="relative max-w-3xl mx-auto pl-8 sm:pl-10 border-l border-border space-y-10 sm:space-y-12">
-          {education.map((edu) => (
-            <div key={edu.degree} className="relative">
-              <span className="absolute -left-[calc(2rem+1px)] sm:-left-[calc(2.5rem+1px)] top-1 h-3 w-3 border border-primary bg-background" />
-
-              <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-2 mb-3">
-                <div>
-                  <h3 className="text-lg sm:text-xl lg:text-2xl font-bold mb-1 leading-tight">
-                    {edu.degree}
-                  </h3>
-                  <p className="text-base sm:text-lg text-primary font-medium">
-                    {edu.institution}
-                  </p>
+        <Timeline className="mx-auto max-w-3xl">
+          {education.map((edu, idx) => (
+            <TimelineItem key={edu.degree} active={idx === 0} markerClassName="top-2 lg:top-2.5">
+              <div className="mb-3 flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between lg:gap-6">
+                <div className="min-w-0">
+                  <h2 className="text-lg font-bold leading-snug sm:text-xl lg:text-2xl">{edu.degree}</h2>
+                  <p className="mt-1 text-base font-medium text-primary sm:text-lg">{edu.institution}</p>
                 </div>
-                <div className="lg:text-right flex-shrink-0">
-                  <div className="flex items-center lg:justify-end gap-2 text-muted-foreground mb-1 font-mono text-sm uppercase">
-                    <Calendar className="h-4 w-4 flex-shrink-0" />
-                    <span>{edu.duration}</span>
-                  </div>
-                  <div className="text-primary font-semibold text-base sm:text-lg">
-                    {edu.grade}
-                  </div>
+                <div className="flex shrink-0 flex-wrap items-center gap-x-4 gap-y-1 lg:flex-col lg:items-end lg:gap-1">
+                  <span className="flex items-center gap-1.5 font-mono text-xs uppercase text-muted-foreground sm:text-sm">
+                    <Calendar className="h-4 w-4 shrink-0" aria-hidden="true" />
+                    {edu.duration}
+                  </span>
+                  <span className="font-mono text-sm font-semibold text-primary sm:text-base">{edu.grade}</span>
                 </div>
               </div>
 
-              <ul className="space-y-1">
-                {edu.description.map((item, i) => (
-                  <li key={i} className="text-muted-foreground flex items-start gap-2 text-sm sm:text-base">
-                    <span className="text-primary mt-1 flex-shrink-0">•</span>
+              <ul className="space-y-1.5">
+                {edu.description.map((item) => (
+                  <li key={item} className="flex items-start gap-3 text-sm text-muted-foreground sm:text-base">
+                    <span className="mt-2 h-1 w-1 shrink-0 bg-primary" aria-hidden="true" />
                     <span>{item}</span>
                   </li>
                 ))}
+                {edu.location && (
+                  <li className="flex items-center gap-1.5 pt-0.5 font-mono text-xs uppercase text-muted-foreground">
+                    <MapPin className="h-3.5 w-3.5 shrink-0" aria-hidden="true" />
+                    {edu.location}
+                  </li>
+                )}
               </ul>
-            </div>
+            </TimelineItem>
           ))}
-        </div>
+        </Timeline>
 
-        {certificates && certificates.length > 0 && (
-          <div className="mt-12 sm:mt-16 max-w-3xl mx-auto">
-            <h2 className="font-display uppercase text-2xl sm:text-3xl mb-6 flex items-center gap-2">
-              <Award className="h-7 w-7 text-primary flex-shrink-0" />
-              Certificates
+        {certificates?.length > 0 && (
+          <section className="mx-auto mt-12 max-w-3xl sm:mt-16">
+            <h2 className="mb-5 flex items-center gap-2.5 font-display text-2xl uppercase sm:mb-6 sm:text-3xl">
+              <Award className="h-6 w-6 shrink-0 text-primary sm:h-7 sm:w-7" aria-hidden="true" />
+              Certifications
             </h2>
-            <div className="border border-border bg-card divide-y divide-border">
+            <ul className="divide-y divide-border border border-border bg-card">
               {certificates.map((cert) => (
-                <div key={cert.title} className="p-4 sm:p-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
-                  <div>
-                    <h3 className="font-bold text-base sm:text-lg">{cert.title}</h3>
-                    <p className="text-muted-foreground text-sm sm:text-base">{cert.issuer}</p>
+                <li
+                  key={cert.title}
+                  className="flex flex-col gap-1.5 p-4 sm:flex-row sm:items-center sm:justify-between sm:gap-4 sm:p-6"
+                >
+                  <div className="min-w-0">
+                    <h3 className="text-base font-bold sm:text-lg">{cert.title}</h3>
+                    <p className="text-sm text-muted-foreground sm:text-base">{cert.issuer}</p>
                   </div>
-                  <span className="text-primary font-mono uppercase text-sm flex-shrink-0">
-                    {cert.date}
-                  </span>
-                </div>
+                  <span className="shrink-0 font-mono text-xs uppercase tracking-wide text-primary">{cert.date}</span>
+                </li>
               ))}
-            </div>
-          </div>
+            </ul>
+          </section>
         )}
       </motion.div>
     </PageLayout>

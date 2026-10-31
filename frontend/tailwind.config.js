@@ -1,13 +1,25 @@
 /** @type {import('tailwindcss').Config} */
 export default {
+    darkMode: "class",
+    future: {
+        // Only apply hover styles on devices that can actually hover (no sticky hover on touch).
+        hoverOnlyWhenSupported: true,
+    },
     content: [
         "./src/**/*.{js,jsx,ts,tsx}",
         "./index.html"
     ],
     theme: {
+        container: {
+            center: true,
+            padding: {
+                DEFAULT: '1rem',
+                sm: '1.5rem',
+                lg: '2rem',
+            },
+        },
         extend: {
             screens: {
-                'xs': '320px',
                 'sm': '480px',
                 'md': '768px',
                 'lg': '1024px',

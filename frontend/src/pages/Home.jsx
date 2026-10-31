@@ -1,6 +1,7 @@
 import { motion } from "framer-motion"
+import { Link } from "react-router-dom"
 import { Button } from "../components/ui/button"
-import { Download, Sparkles } from "lucide-react"
+import { ArrowRight, Download, MapPin } from "lucide-react"
 import { homeContent, skillCategories } from "../content"
 import { getIcon } from "../content/icons"
 import { MarqueeStrip } from "../components/MarqueeStrip"
@@ -10,37 +11,37 @@ const allSkills = skillCategories.flatMap((category) => category.skills)
 
 export default function Home() {
   return (
-    <div className="min-h-[calc(100dvh-4rem)] lg:h-[calc(100dvh-4rem)] lg:overflow-hidden flex flex-col relative overflow-x-hidden">
-      {/* Subtle background */}
-      <div className="absolute inset-0 -z-10 overflow-hidden">
-        <div className="absolute top-1/3 right-1/4 w-64 h-64 sm:w-96 sm:h-96 lg:w-[32rem] lg:h-[32rem] bg-primary/10 blur-3xl rounded-full" />
+    <div className="relative flex min-h-[calc(100dvh-3.5rem)] flex-col overflow-x-hidden sm:min-h-[calc(100dvh-4rem)]">
+      {/* Subtle background glow */}
+      <div className="pointer-events-none absolute inset-0 -z-10 overflow-hidden" aria-hidden="true">
+        <div className="absolute right-0 top-1/4 h-72 w-72 rounded-full bg-primary/10 blur-3xl sm:right-1/4 sm:h-96 sm:w-96 lg:h-[32rem] lg:w-[32rem]" />
       </div>
 
-      <div className="flex-1 min-h-0 flex flex-col justify-center container mx-auto px-4 sm:px-6 lg:px-8 py-3 sm:py-6 lg:py-8 max-w-8xl">
+      <div className="container flex max-w-6xl flex-1 flex-col justify-center py-10 sm:py-12 lg:py-10">
         <motion.div
           initial={{ opacity: 0, y: 12 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.4 }}
-          className="grid grid-cols-1 lg:grid-cols-2 gap-3 sm:gap-6 lg:gap-10 xl:gap-12 items-center min-h-0 py-8 sm:py-10 lg:py-0"
+          className="grid grid-cols-1 items-center gap-8 lg:grid-cols-[1.15fr_1fr] lg:gap-10 xl:gap-12"
         >
-          {/* Animated network graphic */}
-          <div className="hidden lg:flex justify-center items-center lg:order-2 relative">
-            <NetworkGraphic className="w-full max-w-md h-auto" />
+          {/* Animated network graphic: compact on tablets, full size on desktop */}
+          <div className="relative hidden items-center justify-center md:flex lg:order-2">
+            <NetworkGraphic className="h-auto w-full max-w-[15rem] lg:max-w-md" />
 
             <motion.span
-              className="absolute top-8 left-4 h-3 w-3 border border-primary/30"
+              className="absolute left-4 top-8 hidden h-3 w-3 border border-primary/30 lg:block"
               animate={{ rotate: [45, 405] }}
               transition={{ duration: 40, repeat: Infinity, ease: "linear" }}
               aria-hidden="true"
             />
             <motion.span
-              className="absolute bottom-16 right-8 h-4 w-4 border border-primary/20"
+              className="absolute bottom-16 right-8 hidden h-4 w-4 border border-primary/20 lg:block"
               animate={{ rotate: [0, 360] }}
               transition={{ duration: 55, repeat: Infinity, ease: "linear" }}
               aria-hidden="true"
             />
             <motion.span
-              className="absolute bottom-4 left-1/3 h-8 w-8 rounded-full border border-primary/40 flex items-center justify-center"
+              className="absolute bottom-4 left-1/3 hidden h-8 w-8 items-center justify-center rounded-full border border-primary/40 lg:flex"
               animate={{ scale: [1, 1.15, 1] }}
               transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut" }}
               aria-hidden="true"
@@ -50,40 +51,44 @@ export default function Home() {
           </div>
 
           {/* Content */}
-          <div className="text-center lg:text-left lg:order-1 space-y-1.5 sm:space-y-3 lg:space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1 sm:py-1.5 border border-border font-mono text-xs uppercase tracking-widest">
-              <Sparkles className="h-4 w-4 text-primary" />
+          <div className="flex flex-col items-center text-center lg:order-1 lg:items-start lg:text-left">
+            <div className="inline-flex items-center gap-2 border border-border bg-background/60 px-3 py-1.5 font-mono text-[11px] uppercase tracking-widest text-muted-foreground sm:text-xs">
+              <MapPin className="h-3.5 w-3.5 text-primary" aria-hidden="true" />
               <span>{homeContent.greetingBadge}</span>
             </div>
 
-            <h1 className="font-display uppercase text-2xl sm:text-4xl md:text-5xl lg:text-7xl leading-none">
+            <h1 className="mt-5 font-display text-4xl uppercase leading-[0.95] sm:text-5xl md:text-6xl lg:text-7xl">
               {homeContent.name}
             </h1>
 
-            <h2 className="font-mono text-sm sm:text-base md:text-lg uppercase tracking-wide text-primary flex items-center justify-center lg:justify-start gap-2">
-              {homeContent.role}
-            </h2>
+            <div className="mt-4 space-y-1 font-mono uppercase tracking-wide">
+              <h2 className="text-base text-primary sm:text-lg">{homeContent.role}</h2>
+              <p className="text-xs text-muted-foreground sm:text-sm">{homeContent.currentRole}</p>
+            </div>
 
-            <p className="hidden sm:block text-sm lg:text-lg text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed line-clamp-2 lg:line-clamp-none">
+            <p className="mt-5 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base lg:hidden">
+              {homeContent.shortBio}
+            </p>
+            <p className="mt-6 hidden max-w-2xl text-base leading-relaxed text-muted-foreground lg:block xl:text-lg">
               {homeContent.bio}
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-2 sm:gap-4 justify-center lg:justify-start pt-1 sm:pt-2">
+            <div className="mt-7 flex w-full flex-col gap-3 sm:w-auto sm:flex-row">
               <Button asChild size="lg" className="w-full sm:w-auto">
-                <a
-                  href={homeContent.cvUrl}
-                  download
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="min-h-[44px] flex items-center justify-center gap-2"
-                >
-                  <Download className="h-4 w-4" />
+                <a href={homeContent.cvUrl} download>
+                  <Download className="h-4 w-4" aria-hidden="true" />
                   Download CV
                 </a>
               </Button>
+              <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
+                <Link to="/projects">
+                  View Projects
+                  <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </Link>
+              </Button>
             </div>
 
-            <div className="flex gap-3 sm:gap-4 justify-center lg:justify-start pt-1 sm:pt-2">
+            <div className="mt-6 flex gap-3">
               {homeContent.socialLinks.map((social) => {
                 const IconComponent = getIcon(social.icon)
                 if (!IconComponent) return null
@@ -91,12 +96,12 @@ export default function Home() {
                   <a
                     key={social.name}
                     href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="p-3 border border-border text-foreground hover:text-primary hover:border-primary transition-colors duration-300 min-w-[44px] min-h-[44px] flex items-center justify-center"
+                    {...(social.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                    aria-label={social.name}
+                    title={social.name}
+                    className="flex h-11 w-11 items-center justify-center border border-border text-foreground transition-colors duration-300 hover:border-primary hover:text-primary"
                   >
-                    <IconComponent className="h-5 w-5" />
-                    <span className="sr-only">{social.name}</span>
+                    <IconComponent className="h-5 w-5" aria-hidden="true" />
                   </a>
                 )
               })}
@@ -105,7 +110,7 @@ export default function Home() {
         </motion.div>
       </div>
 
-      <div className="border-t border-border py-2 sm:py-4 flex-shrink-0">
+      <div className="shrink-0 border-t border-border py-3 sm:py-4">
         <MarqueeStrip tags={allSkills} />
       </div>
     </div>

@@ -6,9 +6,12 @@ import '@fontsource/jetbrains-mono/700.css'
 import '@fontsource/anton/400.css'
 import './index.css'
 import App from './App.jsx'
+import { ThemeProvider } from './components/ThemeProvider.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
   </StrictMode>,
 )
